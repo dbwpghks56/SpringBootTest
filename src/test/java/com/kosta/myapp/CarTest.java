@@ -22,7 +22,7 @@ public class CarTest {
 	@Test
 	public void carCount() {
 		Long cnt = carRepo.count();
-		System.out.println(cnt); // 멋쟁이dd
+		System.out.println(cnt); // 멋쟁이ddd
 		
 		boolean confirm = carRepo.existsById(111L); // 해당 값이 있는지 확인
 		System.out.println(confirm);
