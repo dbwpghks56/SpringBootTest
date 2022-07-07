@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>게시글 댓글 보기</h1>
+	<h2 th:text="${param.bno}"></h2>
+	<table>
+		<tr>
+			<td>순서</td>
+			<td>댓글 번호</td>
+			<td>내용</td>
+			<td>작성자</td>
+		</tr>
+		<tr th:each="reply, rowstatus : ${replies}">
+			<td th:text="${rowstatus.count}">순서(count)</td>
+			<td th:text="${reply.rno}"></td>
+			<td>[[${reply.replyText}]]</td>
+			<td>[[${reply.replyer}]]</td>
+		</tr>
+	</table>
+</body>
+</html>

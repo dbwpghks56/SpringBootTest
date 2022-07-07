@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.firstline {
+		background-color: lightgreen;
+	}
+	
+	.lastline {
+		background-color: skyblue;
+	}
+</style>
+<script th:inline="javascript" type="text/javascript">
+	let blist = [[${boardlist}]]; // jackson...json 데이터로 넘어옴
+	console.log(blist[0].title);
+</script>
+</head>
+<body>
+	<h1>타임리프 연습 --- boardlist 가져오기</h1>
+	<p>[[${#response.characterEncoding}]]</p>
+	<p th:text="${@environment.getProperty('app.title')}">
+	<table th:with="loginUser2='작가:2'">
+		<tr>
+			<td>순서(index)</td>
+			<td>순서(count)</td>
+			<td>짝수--홀수</td>
+			<td>first--last</td>
+			<td>board 번호</td>
+			<td>제목</td>
+			<td>내용</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td>수정일</td>
+			<td>댓글수</td>
+		</tr>
+		<tr th:each="board, rowstatus:${boardlist}"
+			th:class="${rowstatus.first?'firstline':''}"
+			th:classappend="${rowstatus.last or rowstatus.count == 5?'lastline':''}"
+		>
+			<td th:text="${rowstatus.index}">순서(index)</td>
+			<td th:text="${rowstatus.count}">순서(count)</td>
+			<td th:text="${rowstatus.even + '---' + rowstatus.odd}">짝수--홀수</td>
+			<td th:text="${rowstatus.first + '---' + rowstatus.last}">first--last</td>
+			<td th:text="${board.bno}"></td>
+			<td>[[${board.title}]]</td>
+			<td>[[${board.content}]]</td>
+			<td>[[${board.writer}]]
+				<span th:if="${board.writer == loginUser}">
+					<button>수정</button>
+				</span>
+				<span th:unless="${board.writer == loginUser}">
+					<button>보기</button>
+				</span>
+			</td>
+			<td>[[${board.regdate}]]</td>
+			<td th:text="${#dates.format(board.updatedate, 'yyyy-MM-dd')}"></td>
+			<td>[[${board.replies.size()}]]</td>
+		</tr>
+	</table>
+</body>
+</html>

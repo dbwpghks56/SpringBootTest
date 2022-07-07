@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>게시판 목록</h1>
+	<table>
+		<tr>
+			<td>순서</td>
+			<td>board 번호</td>
+			<td>제목</td>
+			<td>내용</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td>수정일</td>
+			<td>댓글수</td>
+		</tr>
+		<tr th:each="board, rowstatus : ${blist}">
+			<td th:text="${rowstatus.count}">순서(count)</td>
+			<td th:text="${board.bno}"></td>
+			<td>[[${board.title}]]</td>
+			<td>[[${board.content}]]</td>
+			<td>[[${board.writer}]]</td>
+			<td th:text="${#dates.format(board.regdate, 'yyyy-MM-dd')}">[[${board.regdate}]]</td>
+			<td th:text="${#dates.format(board.updatedate, 'yyyy-MM-dd')}"></td>
+			<td>[[${board.replies.size()}]]
+				<span th:if="${board.replies.size() > 0}">
+					<a th:href="@{repliesboard.go(bno=${board.bno})}">댓글 보기</a>
+				</span>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

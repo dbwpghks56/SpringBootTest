@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:insert="~{fragments/header::header1}"></div>
+	<h1>타임리프 유틸리티 표현식</h1>
+	<p th:text="${now}"></p>
+	<p th:text="${salary}"></p>
+	<p th:text="${message}"></p>
+	<p th:text="${fruits}"></p>
+	<hr>
+	<p th:text="|날짜format지정: ${#dates.format(now,'yyyy-MM-dd')}|"></p>
+	<div th:with="aa=${#dates.format(now,'yyyy-MM-dd')}">
+		<p>지역변수에 저장하여 읽기 : [[${aa}]]</p>
+	</div>
+	<p th:text="${#numbers.formatDecimal(salary,3,'COMMA',2,'POINT')}"></p>
+	<div th:with="bb=${#numbers.formatDecimal(salary,3,'COMMA',2,'POINT')}">
+		<p th:text="|지역변수에 저장하여 읽기 : ${bb}|"></p>
+	</div>
+
+	<p
+		th:utext="${#strings.replace(message,'hi','<strong>HI!!!!</strong>')}"></p>
+
+	<ul>
+		<li th:each="aa:${#strings.listSplit(message,' ')}">[[${aa}]]</li>
+	</ul>
+	<ul>
+		<li th:each="f : ${fruits}">[[${f}]]</li>
+	</ul>
+	<ul>
+		<li><a th:href="@{http://localhost:8080/myapp2/sample1}">링크1...경로 full 작성</a></li>
+		<li><a th:href="@{/sample2}">링크2</a></li>
+		<li><a th:href="@{~/sample2}">링크3</a></li>
+		<li><a th:href="@{sample2}">링크4</a></li>
+		<li><a th:href="@{/sample2(loginUser='작가:2', param2='hello')}">링크5, 절대경로, 파라미터가 있다면</a></li>
+	</ul>
+	<div th:insert="~{fragments/footer::footer1}"></div>
+</body>
+</html>
+
+
+
+

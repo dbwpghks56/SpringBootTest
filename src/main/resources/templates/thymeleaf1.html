@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>타임리프 연습</h1>
+	<p th:text="|타임리프 연습|"></p>
+	<p th:text="${score}"></p>
+	<p th:text="${myname}"></p>
+	<p th:utext="${'<h1>' + mycar + '</h1>'}"></p>
+	<p th:text="${'<h1>' + mycar + '</h1>'}"></p>
+	<p th:text="${mycar.model}"></p>
+</body>
+</html>
