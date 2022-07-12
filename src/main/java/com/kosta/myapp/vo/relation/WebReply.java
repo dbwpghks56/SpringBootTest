@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,7 +41,7 @@ public class WebReply {
 	@UpdateTimestamp  //생성시 생성일자, 수정시 변경된다. 
 	private Timestamp updatedate;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	//@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@ManyToOne(fetch = FetchType.LAZY) //lazy로 변경해도 OneToMany에서 Lazy가 그대로 수행~
 	//@JoinColumn(name="board_bno")

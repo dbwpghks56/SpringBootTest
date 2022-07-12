@@ -12,7 +12,7 @@ public interface WebBoardRepository
 		extends PagingAndSortingRepository<WebBoard, Long>, QuerydslPredicateExecutor<WebBoard> {
 
 	// 1. 추상메서드 : 정의는 있고 구현은 없다. 구현은 implements 받은 class가 한다.
-	
+
 	// 2. default 메서드 : interface를 구현한 모든 class가 공유해서 사용하는 메서드다. 재정의 가능.
 	public default Predicate makePredicate(String type, String keyword) {
 		BooleanBuilder builder = new BooleanBuilder();
@@ -22,17 +22,17 @@ public interface WebBoardRepository
 		if (type == null)
 			return builder;
 		switch (type) {
-		case "t":
-			builder.and(board.title.like("%" + keyword + "%"));
-			break;
-		case "c":
-			builder.and(board.content.like("%" + keyword + "%"));
-			break;
-		case "w":
-			builder.and(board.writer.like("%" + keyword + "%"));
-			break;
-		default:
-			break;
+			case "title":
+				builder.and(board.title.like("%" + keyword + "%"));
+				break;
+			case "content":
+				builder.and(board.content.like("%" + keyword + "%"));
+				break;
+			case "writer":
+				builder.and(board.writer.like("%" + keyword + "%"));
+				break;
+			default:
+				break;
 		}
 		return builder;
 	}
