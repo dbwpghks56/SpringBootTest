@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.PDSBoardRepository;
 import com.kosta.myapp.repository.PDSFileRepository;
@@ -18,6 +19,7 @@ import lombok.extern.java.Log;
 
 @SpringBootTest
 @Log
+@WebAppConfiguration
 public class PDSBoradTest {
 	
 	@Autowired

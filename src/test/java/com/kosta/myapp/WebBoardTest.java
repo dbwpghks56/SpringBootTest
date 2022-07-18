@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.WebBoardRepository;
 import com.kosta.myapp.repository.WebReplyRepository;
@@ -14,6 +15,7 @@ import com.kosta.myapp.vo.relation.WebBoard;
 import com.kosta.myapp.vo.relation.WebReply;
 
 @SpringBootTest
+@WebAppConfiguration
 public class WebBoardTest {
 
 	@Autowired

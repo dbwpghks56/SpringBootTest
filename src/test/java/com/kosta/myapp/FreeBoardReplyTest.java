@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kosta.myapp.repository.FreeBoardRepliesRepository;
@@ -20,6 +21,7 @@ import com.kosta.myapp.vo.relation.FreeBoard;
 import com.kosta.myapp.vo.relation.FreeBoardReply;
 
 @SpringBootTest
+@WebAppConfiguration
 @Commit
 public class FreeBoardReplyTest {
 

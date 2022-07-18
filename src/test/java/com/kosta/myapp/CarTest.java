@@ -1,19 +1,17 @@
 package com.kosta.myapp;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.CarRepository;
 import com.kosta.myapp.vo.CarVO;
 
 @SpringBootTest
+@WebAppConfiguration
 public class CarTest {
 
 	@Autowired

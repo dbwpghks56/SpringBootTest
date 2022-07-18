@@ -13,11 +13,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.BoardRepository;
 import com.kosta.myapp.vo.BoardVO;
 
 @SpringBootTest
+@WebAppConfiguration
 public class BoardTest {
 	@Autowired
 	BoardRepository boardRepo;

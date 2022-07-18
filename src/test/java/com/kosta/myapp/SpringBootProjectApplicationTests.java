@@ -2,10 +2,12 @@ package com.kosta.myapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.vo.CarVO;
 
 @SpringBootTest
+@WebAppConfiguration
 class SpringBootProjectApplicationTests {
 
 	@Test

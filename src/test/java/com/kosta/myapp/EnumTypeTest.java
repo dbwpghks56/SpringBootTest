@@ -6,12 +6,14 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.EnumTypeRepository;
 import com.kosta.myapp.vo.MemberRoleEnum;
 import com.kosta.myapp.vo.multikey.EnumTypeVO;
 
 @SpringBootTest
+@WebAppConfiguration
 public class EnumTypeTest {
 	@Autowired
 	EnumTypeRepository eRepo;

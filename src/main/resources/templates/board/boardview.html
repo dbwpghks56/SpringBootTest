@@ -109,10 +109,10 @@
 				var replyer = $("input[name='replyer']");
 
 				$("#addReply").click(function() {
-					mode = "ADD";alert("add클릭");
 					rno.val("");replyer.val("");replyer.val("");
 					$("#myModal").show();
-					$(".modal-title").text("댓글을 추가합니다.")
+					$(".modal-title").text("댓글을 추가합니다.");
+					$("#modalDelBtn").attr("disabled", "disabled");
 				});
 				
 				$("#replyTable").on("click", "tr", function() {
@@ -126,7 +126,8 @@
 					$("input[name='replyText']").val(reply);
 					$("input[name='replyer']").val(replyer);
 					$("#myModal").show();
-					$(".modal-title").text("수정 또는 삭제 작업")
+					$(".modal-title").text("수정 또는 삭제 작업");
+					$("#modalDelBtn").removeAttr("disabled");
 				 });
 				
 				$("#modalSaveBtn").click(function() {

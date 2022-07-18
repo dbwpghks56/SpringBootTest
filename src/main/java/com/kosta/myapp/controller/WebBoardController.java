@@ -1,8 +1,15 @@
 package com.kosta.myapp.controller;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kosta.myapp.repository.MemberRepository;
 import com.kosta.myapp.repository.WebBoardRepository;
 import com.kosta.myapp.repository.WebReplyRepository;
+import com.kosta.myapp.security.MemberService;
 import com.kosta.myapp.vo.PageMaker;
 import com.kosta.myapp.vo.PageVO;
 import com.kosta.myapp.vo.relation.WebBoard;
@@ -28,6 +37,9 @@ public class WebBoardController {
 	@Autowired
 	WebReplyRepository reRepo;
 	
+	@Autowired
+	MemberService mservice;
+	
 	@GetMapping("/repliesboard.go")
 	public String replyToBoard( Long bno, Model model) {
 		model.addAttribute("replies", reRepo.getRepliesOfBoard(boardRepo.findById(bno).get()));
@@ -36,9 +48,26 @@ public class WebBoardController {
 	}
 	
 	@GetMapping("/boardlist.go")
-	public String boardlist(@ModelAttribute PageVO pageVO , Model model) {
+	public String boardlist(@ModelAttribute PageVO pageVO , Model model, Principal principal, Authentication authentication,
+			HttpSession session) {
 		Pageable page = pageVO.makePaging(0, "bno");
 		Predicate predicate = boardRepo.makePredicate(pageVO.getType(), pageVO.getKeyword());
+		
+		System.out.println(principal);
+		System.out.println((UserDetails) authentication.getPrincipal());
+		
+		UserDetails member = (UserDetails)session.getAttribute("user");
+		System.out.println("방법0:" + member);
+		System.out.println("방법1:" + principal);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		System.out.println("방법2:" + userDetails);
+		Object principal2 = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		UserDetails userDetails2 = (UserDetails)principal2; 
+		System.out.println("방법3:" + userDetails2);
+	
+		String mid = principal.getName();
+		UserDetails userDetails3 = mservice.loadUserByUsername(mid);
+		System.out.println("방법4:" +userDetails3);
 		
 		Page<WebBoard> blist =  boardRepo.findAll(predicate, page);
 		

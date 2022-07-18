@@ -7,12 +7,14 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.kosta.myapp.repository.MemberRepository;
 import com.kosta.myapp.vo.MemberDTO;
 import com.kosta.myapp.vo.MemberRoleEnum;
 
 @SpringBootTest
+@WebAppConfiguration
 public class MemberTest {
 	@Autowired
 	MemberRepository mRepo;
