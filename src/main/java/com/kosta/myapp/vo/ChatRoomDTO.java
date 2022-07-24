@@ -38,6 +38,10 @@ public class ChatRoomDTO {
     private String name;
     //WebSocketSession은 Spring에서 Websocket Connection이 맺어진 세션
     
+    private String mid;
+    
+    private String target;
+    
 	@OneToMany(cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY )
     @JoinColumn(name = "roomId")

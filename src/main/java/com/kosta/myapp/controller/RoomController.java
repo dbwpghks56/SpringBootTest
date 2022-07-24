@@ -1,6 +1,8 @@
 package com.kosta.myapp.controller;
 
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +29,11 @@ public class RoomController {
 	ChatRoomRepository roomrepo;
 
 	@GetMapping(value = "/rooms")
-	public ModelAndView rooms() {
+	public ModelAndView rooms(Principal principal) {
+		String mid = principal.getName();
+		
 		ModelAndView mv = new ModelAndView("chat/rooms");
-		mv.addObject("list", roomrepo.findAll());
+		mv.addObject("list", roomrepo.findByTargetOrId(mid));
 
 		return mv;
 	}

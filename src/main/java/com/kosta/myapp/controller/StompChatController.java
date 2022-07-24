@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,9 @@ public class StompChatController {
 
 	@Autowired
 	ChatRoomRepository rrepo;
+	
+	@Autowired
+	PasswordEncoder passwordencoder;
 
 	//Client가 SEND할 수 있는 경로
     //stompConfig에서 설정한 applicationDestinationPrefixes와 @MessageMapping 경로가 병합됨
@@ -57,13 +61,15 @@ public class StompChatController {
     @MessageMapping(value = "/chat/message")
     public void message(ChatMessageDTO message){
     	
-    	mrepo.save(message);
-    	
     	ChatMessageVO m = new ChatMessageVO();
     	
     	m.setMessage(message.getMessage());
     	m.setRoomId(message.getRoomId());
     	m.setWriter(message.getWriter());
+    	
+    	message.setMessage(passwordencoder.encode(message.getMessage()));
+    	
+    	mrepo.save(message);
 //    	
 //    	String api_key = "NCSNK3ZLZJS8QN23";
 //        String api_secret = "QPO5Z4CQRJVFGWRIEZRHBOJ4HXYK91LX";
