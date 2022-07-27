@@ -1,28 +1,22 @@
 package com.kosta.myapp.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kosta.myapp.repository.ChatMessageRepository;
 import com.kosta.myapp.repository.ChatRoomRepository;
 import com.kosta.myapp.vo.ChatMessageDTO;
 import com.kosta.myapp.vo.ChatMessageVO;
-import com.kosta.myapp.vo.ChatRoomDTO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 
@@ -39,15 +33,11 @@ public class StompChatController {
 	@Autowired
 	ChatRoomRepository rrepo;
 	
-	@Autowired
-	PasswordEncoder passwordencoder;
-
 	//Client가 SEND할 수 있는 경로
     //stompConfig에서 설정한 applicationDestinationPrefixes와 @MessageMapping 경로가 병합됨
     //"/pub/chat/enter"
     @MessageMapping(value = "/chat/enter")
     public void enter(ChatMessageDTO message){
-    	
     	ChatMessageVO m = new ChatMessageVO();
     	
     	m.setRoomId(message.getRoomId());
@@ -66,8 +56,6 @@ public class StompChatController {
     	m.setMessage(message.getMessage());
     	m.setRoomId(message.getRoomId());
     	m.setWriter(message.getWriter());
-    	
-    	message.setMessage(passwordencoder.encode(message.getMessage()));
     	
     	mrepo.save(message);
 //    	
